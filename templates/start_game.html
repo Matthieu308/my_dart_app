@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="bg-white p-4 rounded">
+  <h2 class="mb-3">Neues Dart-Spiel</h2>
+  <form method="POST" class="row g-3">
+    <div class="col-md-6">
+      <label for="player1" class="form-label">Spieler 1</label>
+      <input type="text" name="player1" id="player1" class="form-control" required>
+    </div>
+    <div class="col-md-6">
+      <label for="player2" class="form-label">Spieler 2 (optional)</label>
+      <input type="text" name="player2" id="player2" class="form-control">
+    </div>
+    <div class="col-12">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="double_out" value="1" id="double_out">
+        <label class="form-check-label" for="double_out">Double-Out?</label>
+      </div>
+    </div>
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">Spiel starten</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

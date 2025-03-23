@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="bg-white p-4 rounded">
+  <h2 class="mb-3">Spiel beendet!</h2>
+  <ul class="list-group mb-3">
+    {% for (name, score) in scores %}
+      <li class="list-group-item d-flex justify-content-between">
+        <span>{{ name }}</span>
+        <span>{{ score }}</span>
+      </li>
+    {% endfor %}
+  </ul>
+  <a href="{{ url_for('start_game') }}" class="btn btn-primary me-2">Neues Spiel</a>
+  <a href="{{ url_for('index') }}" class="btn btn-outline-primary">Home</a>
+</div>
+{% endblock %}

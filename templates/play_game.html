@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="bg-white p-4 rounded">
+  <h2 class="mb-3">Dart-Spiel</h2>
+
+  <!-- Prüfen, ob das Spiel bereits beendet ist -->
+  {% if game_finished %}
+    <div class="alert alert-info">
+      <h3>Spiel beendet!</h3>
+    </div>
+  {% else %}
+    <p>Aktueller Spieler: <strong>{{ current_player }}</strong>, Dart {{ current_dart }}/3</p>
+  {% endif %}
+
+  <!-- Anzahl aller Würfe (Busts werden auch gezählt) -->
+  <p><em>Anzahl Würfe:</em> <strong>{{ total_throws }}</strong></p>
+
+  <!-- Score-Liste -->
+  <ul class="list-group mb-3">
+    {% for (name, score) in scores %}
+      <li class="list-group-item d-flex justify-content-between">
+        <span>{{ name }}</span>
+        <span>{{ score }}</span>
+      </li>
+    {% endfor %}
+  </ul>
+
+  {% if not game_finished %}
+    <!-- 1..20 mit Single/Double/Triple -->
+    <div class="mb-3">
+      <h5>Wurf für 1 bis 20 (mit Multiplikator):</h5>
+      <form method="POST" class="d-flex align-items-end flex-wrap gap-2">
+        <!-- Auswahl Punkte (1..20) -->
+        <div>
+          <label for="base_value" class="form-label">Punkte</label>
+          <select name="base_value" id="base_value" class="form-select">
+            {% for p in range(1, 21) %}
+              <option value="{{ p }}">{{ p }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <!-- Auswahl Multiplikator (Single/Double/Triple) -->
+        <div>
+          <label for="multiplier" class="form-label">Multiplikator</label>
+          <select name="multiplier" id="multiplier" class="form-select">
+            <option value="1">Single</option>
+            <option value="2">Double</option>
+            <option value="3">Triple</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Wurf</button>
+      </form>
+    </div>
+
+    <hr class="mb-3">
+
+    <!-- Buttons für 0 (Miss), 25 (Single Bull), 50 (Double Bull) -->
+    <div class="mb-3">
+      <h5>Wurf für Miss, Bull oder Double Bull:</h5>
+      <div class="d-flex flex-wrap gap-2">
+        <!-- 0 - Miss -->
+        <form method="POST">
+          <input type="hidden" name="base_value" value="0">
+          <input type="hidden" name="multiplier" value="1">
+          <button type="submit" class="btn btn-secondary">Miss (0)</button>
+        </form>
+
+        <!-- 25 - Single Bull -->
+        <form method="POST">
+          <input type="hidden" name="base_value" value="25">
+          <input type="hidden" name="multiplier" value="1">
+          <button type="submit" class="btn btn-warning">Single Bull (25)</button>
+        </form>
+
+        <!-- 50 - Double Bull -->
+        <form method="POST">
+          <input type="hidden" name="base_value" value="50">
+          <input type="hidden" name="multiplier" value="1">
+          <button type="submit" class="btn btn-danger">Double Bull (50)</button>
+        </form>
+      </div>
+    </div>
+  {% endif %}
+
+  <!-- Links zu "Neues Spiel" und "Home" -->
+  <a href="{{ url_for('start_game') }}" class="btn btn-secondary me-2">Neues Spiel</a>
+  <a href="{{ url_for('index') }}" class="btn btn-outline-primary">Home</a>
+</div>
+{% endblock %}

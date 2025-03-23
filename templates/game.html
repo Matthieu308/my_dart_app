@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="mb-3">Dart-Spiel</h2>
+<p>Hallo <strong>{{ username }}</strong>, viel Erfolg beim Dart!</p>
+
+<form method="POST" class="row g-3">
+  <div class="col-md-6">
+    <label for="points" class="form-label">Punkte abziehen</label>
+    <input type="number" name="points" id="points" 
+           class="form-control" value="20">
+  </div>
+  <div class="col-12">
+    <button type="submit" class="btn btn-success">Wurf ausführen</button>
+  </div>
+</form>
+{% endblock %}

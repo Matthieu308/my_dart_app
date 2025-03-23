@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="bg-white p-4 rounded">
+    <h1 class="mb-3">Willkommen{% if session.username %}, {{ session.username }}{% endif %}!</h1>
+    <p>Dies ist deine Darts-App. Bitte nutze die Navigation oben, um ein Spiel zu starten oder dich einzuloggen.</p>
+  </div>
+{% endblock %}

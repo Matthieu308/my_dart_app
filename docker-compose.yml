@@ -1,0 +1,32 @@
+version: '3'
+services:
+  web:
+    build: .
+    container_name: flask_dart_app
+    ports:
+      - "5000:5000"
+    environment:
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASS=secret
+      - DB_NAME=dartdb
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8
+    container_name: dartdb
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_DATABASE=dartdb
+    volumes:
+      # 1) Persistente MySQL-Daten
+      - mysql_data:/var/lib/mysql
+      # 2) Init-Skript, das beim ersten Containerstart ausgeführt wird
+      - ./init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
+
+# Volume-Definition am Ende:
+volumes:
+  mysql_data:
