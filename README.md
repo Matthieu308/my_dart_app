@@ -23,10 +23,11 @@ Diese Webanwendung ermöglicht es, das klassische Darts-Spiel **501 (mit optiona
 - Docker  
 - Docker Compose
 
-### Setup starten
+## Setup starten
 
 ### bash
-git clone https://github.com/matthieu308/my_dart_app.git
-cd my_dart_app
-docker compose up --build
+
+- git clone https://github.com/matthieu308/my_dart_app.git
+- cd my_dart_app
+- docker compose up --build
 
